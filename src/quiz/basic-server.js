@@ -43,15 +43,16 @@ const server = http.createServer((req, res) => {
             // Send response with the extracted parameters
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(incidents.filter((incident) => {
-                return incident.id === `MABOS00${id}`
-            })));
-        }
-    } else {
-        // If the request is for an unsupported endpoint, send a not found response
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('Endpoint not found');
-    }
-});
+                            return incident.id === `MABOS00${id}`
+                        })));
+                    } else {
+                        res.writeHead(400, { 'Content-Type': 'text/plain' });
+                        res.end('Invalid Request');
+                    }
+                } else {
+                    // If the request is for an unsupported endpoint, send a not found response
+            	@@ -54,5 +57,5 @@ const server = http.createServer((req, res) => {
+            });
 
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
