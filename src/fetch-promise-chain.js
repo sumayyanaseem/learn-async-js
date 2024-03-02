@@ -1,7 +1,8 @@
 const fetchPromise = fetch(
     "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
   );
-  
+
+  //remove nested layers and separate dependencies from then block
   fetchPromise
     .then((response) => response.json())
     .then((products) => {
@@ -10,5 +11,5 @@ const fetchPromise = fetch(
           });
     });
 
-    console.log('Chaining promises ... ');
+  console.log('Chaining promises ... ');
   

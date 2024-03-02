@@ -3,7 +3,9 @@ const fetchPromise = fetch(
 );
 
 fetchPromise.then((response) => {
+//executes .json() call asynchronously
   const jsonPromise = response.json();
+  //similar to callback hell
   jsonPromise.then((products) => {
     products.forEach(product => {
       console.log(product.name);
