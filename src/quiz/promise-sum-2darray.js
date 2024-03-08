@@ -4,7 +4,6 @@ const array2D = [
     [7, 8, 9]
 ];
 
-
 function SumOfARow(arr,rowIndex){
     return new Promise((resolve, reject) => {
         console.log('Sum called ... ');
@@ -27,18 +26,24 @@ function SumOfARow(arr,rowIndex){
 })
 }
 
-promises=[];
+async function CalculateSum(){
+    promises=[];
 
 for(let x=0;x<array2D.length;x++){
     promises.push(SumOfARow(array2D,x))
 }
-
-Promise.all(promises)
-    .then((rowsums)=>{
+const rowSums = await Promise.all(promises);
+try{
         let sum=0;
-        rowsums.forEach(rowsum =>{
+        rowSums.forEach(rowsum =>{
             sum+=rowsum;
-        })
+        });
         console.log(sum);
-    })
-    .catch((error)=> console.log(error))
+        return 'done'
+    }catch(error){
+       console.log(error);
+        return 'failed';
+    }
+}
+
+CalculateSum().then((status)=>console.log(status));
